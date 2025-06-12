@@ -1,0 +1,49 @@
+{
+  "name": "smp-sdk-ts",
+  "version": "1.0.0",
+  "description": "A TypeScript SDK for SMP platform with OAuth2 and user authentication.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "build": "tsc ",
+    "lint": "eslint 'src/**/*.ts'",
+    "test": "jest",
+    "start": "npm run build ; node  --trace-deprecation dist/index.js ",
+    "prepare": "tsc --outDir ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sylorion/smp-ts-sdk.git"
+  },
+  "keywords": [
+    "SDK",
+    "SMP",
+    "JS",
+    "Kit"
+  ],
+  "author": "Services SAS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sylorion/smp-sdk-ts/issues"
+  },
+  "homepage": "https://github.com/sylorion/smp-sdk-ts#readme",
+  "devDependencies": {
+    "@types/node": "^22.5.1",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@graphql-codegen/typescript-graphql-request": "^6.2.0",
+    "axios": "^1.7.5",
+    "cross-fetch": "^4.1.0",
+    "intl-messageformat": "^10.5.14",
+    "node-fetch": "^3.3.2"
+  }
+}
