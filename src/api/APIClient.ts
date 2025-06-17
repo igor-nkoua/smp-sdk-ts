@@ -65,6 +65,10 @@ export class APIClient {
 
     this.graphqlClient = new GraphQLClient(config.graphqlUrl, {
       fetch: customFetch as unknown as typeof fetch,
+      headers: {
+        "Content-Type": "application/json",
+        "x-apollo-operation-name": "DefaultGraphQLRequest"  // Obligatoire pour éviter CSRF
+      },
     });
   }
 
