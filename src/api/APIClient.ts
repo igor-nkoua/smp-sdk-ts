@@ -27,6 +27,7 @@ interface CustomFetchInit extends RequestInit {
 
 // Création d'un fetch personnalisé avec l'agent HTTPS
 const customFetch = async (input: string | URL, init?: CustomFetchInit): Promise<Response> => {
+  console.log("💡 Using httpsAgent in fetch"); // Ajoute un log
   const url = typeof input === 'string' ? input : input.toString();
   return nodeFetch(url, {
     ...init,
