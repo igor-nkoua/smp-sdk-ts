@@ -3,39 +3,8 @@ import { GraphQLClient, ClientError } from 'graphql-request';
 import { ConfigManager } from '../config/ConfigManager.js';
 import { ErrorHandler } from "../utils/ErrorHandler.js";
 import { logger } from '../utils/Logger.js';
-import nodeFetch, { RequestInit, Response } from 'node-fetch';
-import https from 'https';
-import fs from 'fs';
-
-const isProdOrStaging = process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging';
-
-export const httpsAgent = isProdOrStaging
-  ? new https.Agent({
-      cert: fs.readFileSync(process.env.CERT_PATH!, 'utf8'),
-      key: fs.readFileSync(process.env.KEY_PATH!, 'utf8'),
-      ca: fs.readFileSync(process.env.CA_PATH!, 'utf8'),
-      rejectUnauthorized: true,
-    })
-  : undefined;
-
-// Type personnalisé pour le fetch avec agent
-// Type personnalisé pour le fetch avec agent
-// Utilisez Response de node-fetch plutôt que de lib.dom
-interface CustomFetchInit extends RequestInit {
-  agent?: https.Agent;
-}
-
-// Création d'un fetch personnalisé avec l'agent HTTPS
-const customFetch = async (input: string | URL, init?: CustomFetchInit): Promise<Response> => {
-  console.log("💡 Using httpsAgent in fetch"); // Ajoute un log
-  const url = typeof input === 'string' ? input : input.toString();
-  return nodeFetch(url, {
-    ...init,
-    agent: httpsAgent,
-  });
-};
-
-
+import { httpsAgent, undiciAgent } from './httpsAgent.js';
+import { customFetch } from './customFetch.js';
 
 /**
  * Interface unifiée pour interagir avec les API REST et GraphQL.
@@ -56,14 +25,6 @@ export class APIClient {
       baseURL: config.apiUrl,
       httpsAgent: httpsAgent,
     }); 
-    // Configuration du client GraphQL avec support SSL
-    const graphqlOptions = isProdOrStaging
-      ? {
-          agent: httpsAgent,
-          // Vous pouvez aussi ajouter d'autres options fetch ici si nécessaire
-        }
-      : {};
-
     this.graphqlClient = new GraphQLClient(config.graphqlUrl, {
       fetch: customFetch as unknown as typeof fetch,
       headers: {
