@@ -3,7 +3,8 @@
 //   fetch('https://api.example.com/track', {
 //     method: 'POST',
 //     headers: {
-//       'Content-Type': 'application/json'
+//       'Content-Type': 'application/json',
+//        "x-apollo-operation-name": "DefaultGraphQLRequest"
 //     },
 //     body: JSON.stringify(event)
 //   })
