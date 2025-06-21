@@ -43,8 +43,6 @@
     "@graphql-codegen/typescript-graphql-request": "^6.2.0",
     "axios": "^1.7.5",
     "cross-fetch": "^4.1.0",
-    "intl-messageformat": "^10.5.14",
-    "node-fetch": "^3.3.2",
-    "undici": "^7.10.0"
+    "intl-messageformat": "^10.5.14"
   }
 }

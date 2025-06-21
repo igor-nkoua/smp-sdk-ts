@@ -3,8 +3,6 @@ import { GraphQLClient, ClientError } from 'graphql-request';
 import { ConfigManager } from '../config/ConfigManager.js';
 import { ErrorHandler } from "../utils/ErrorHandler.js";
 import { logger } from '../utils/Logger.js';
-import { httpsAgent, undiciAgent } from './httpsAgent.js';
-import { customFetch } from './customFetch.js';
 
 /**
  * Interface unifiée pour interagir avec les API REST et GraphQL.
@@ -23,7 +21,6 @@ export class APIClient {
     this.config = config; 
     this.restClient = axios.create({
       baseURL: config.apiUrl,
-      httpsAgent: httpsAgent,
     }); 
     this.graphqlClient = new GraphQLClient(config.graphqlUrl, {
       headers: {
