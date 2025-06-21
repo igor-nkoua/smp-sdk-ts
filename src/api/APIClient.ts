@@ -22,12 +22,7 @@ export class APIClient {
     this.restClient = axios.create({
       baseURL: config.apiUrl,
     }); 
-    this.graphqlClient = new GraphQLClient(config.graphqlUrl, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-apollo-operation-name": "DefaultGraphQLRequest"  
-      },
-    });
+    this.graphqlClient = new GraphQLClient(config.graphqlUrl);
   }
 
   /**
@@ -35,6 +30,11 @@ export class APIClient {
   */
   public updateHeaderAppSecret(secret: string): GraphQLClient {
     this.graphqlClient = this.graphqlClient.setHeader("x-services-app-token",  `${secret}`);
+    return this.graphqlClient;
+  }
+
+  public updateHeaderOperationName(secret: string): GraphQLClient {
+    this.graphqlClient = this.graphqlClient.setHeader("x-apollo-operation-name",  "DefaultGraphQLRequest");
     return this.graphqlClient;
   }
 

@@ -63,6 +63,7 @@ export class SMPClient {
     this.authTokenManager = new AuthTokenManager(this.configManager, this.httpApiClient);
     this.httpApiClient.updateHeaderAppID(this.configManager.appId);
     this.httpApiClient.updateHeaderAppSecret(this.configManager.appSecret);
+    this.httpApiClient.updateHeaderOperationName("");
     this.httpApiClient.updateHeaderAppAccessToken("");
     if (this.configManager.wsEnabled) {
       this.initWebSocket();
